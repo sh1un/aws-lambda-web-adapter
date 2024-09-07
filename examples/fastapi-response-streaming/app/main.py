@@ -20,12 +20,13 @@ async def root():
 
 
 class Message(BaseModel):
-    role: str  # Role can be 'system', 'user', or 'assistant'
+    role: str  # Role can be 'user' or 'assistant'
     content: str  # The content of the message
 
 
 class ChatRequest(BaseModel):
     model: str  # Model name provided by the client
+    system: Optional[str] = None  # Optional system prompt
     messages: List[Message]  # List of messages with roles and content
     temperature: Optional[float] = 0.5  # Optional, default temperature is 0.5
     stream: Optional[bool] = True  # Enable streaming by default
@@ -43,8 +44,12 @@ def api_chat_completion(chat_request: ChatRequest):
         "messages": [
             {"role": msg.role, "content": msg.content} for msg in chat_request.messages
         ],
-        "temperature": chat_request.temperature,
+        "temperature": chat_request.temperature,  # Accept temperature from the front-end
     }
+
+    # Include the system prompt if provided
+    if chat_request.system:
+        body["system"] = chat_request.system
 
     return StreamingResponse(
         bedrock_stream(chat_request.model, body), media_type="text/html"
