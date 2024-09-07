@@ -1,25 +1,81 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Psy test demo</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+  </head>
 
-<head>
-    <title>Storyteller</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
-</head>
-
-<body>
+  <body>
     <div id="container" class="row">
-        <div class="column column-67">
-            <h1>Serverless Bedtime Storyteller</h1>
-            <h4>Enter a topic and let AI writes a bedtime story for you.</h4>
-            <input type="text" id="topic" placeholder="Enter a topic">
-            <button id="tell-story">Generate</button>
-            <div id="story-output"></div>
-        </div>
-    </div>
-    <script src="script.js"></script>
-</body>
+      <div class="column column-67">
+        <h1>Psy test demo (us-east-1)</h1>
+        <h4>
+          Enter your request details below and let the AI generate a response.
+        </h4>
 
+        <!-- Input fields for model, system prompt, and user message -->
+        <label for="model">Model:</label>
+        <small
+          ><a
+            href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html"
+            target="_blank"
+            >Refer to the AWS Bedrock model IDs documentation</a
+          ></small
+        >
+        <input
+          type="text"
+          id="model"
+          placeholder="Enter model ID (e.g., 'anthropic.claude-3-sonnet-20240229-v1:0')"
+          value="anthropic.claude-3-sonnet-20240229-v1:0"
+        />
+
+        <label for="system">System Prompt:</label>
+        <textarea id="system" placeholder="Enter system prompt"></textarea>
+
+        <label for="user-message">User Message:</label>
+        <textarea id="user-message" placeholder="Enter user message"></textarea>
+
+        <!-- Input for max_tokens and temperature -->
+        <label for="max-tokens">Max Tokens:</label>
+        <input
+          type="number"
+          id="max-tokens"
+          value="1024"
+          min="1"
+          placeholder="Enter max tokens"
+        />
+
+        <label for="temperature">Temperature:</label>
+        <input
+          type="number"
+          step="0.1"
+          id="temperature"
+          value="0.5"
+          min="0"
+          max="1"
+          placeholder="Enter temperature"
+        />
+
+        <!-- Button to trigger the API call -->
+        <button id="generate-response">Generate</button>
+
+        <!-- Output area for the story -->
+        <div id="story-output"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
