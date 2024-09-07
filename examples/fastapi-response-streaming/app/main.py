@@ -29,6 +29,7 @@ class ChatRequest(BaseModel):
     system: Optional[str] = None  # Optional system prompt
     messages: List[Message]  # List of messages with roles and content
     temperature: Optional[float] = 0.5  # Optional, default temperature is 0.5
+    max_tokens: Optional[int] = 1024  # Optional, default max_tokens is 1024
     stream: Optional[bool] = True  # Enable streaming by default
 
 
@@ -39,7 +40,7 @@ def api_chat_completion(chat_request: ChatRequest):
 
     # Construct the payload including required fields like max_tokens and anthropic_version
     body = {
-        "max_tokens": 1024,  # Required by Bedrock API
+        "max_tokens": chat_request.max_tokens,  # Accept max_tokens from the front-end
         "anthropic_version": "bedrock-2023-05-31",  # Required by Bedrock API
         "messages": [
             {"role": msg.role, "content": msg.content} for msg in chat_request.messages
