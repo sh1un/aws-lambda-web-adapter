@@ -33,7 +33,7 @@ class ChatRequest(BaseModel):
     stream: Optional[bool] = True  # Enable streaming by default
 
 
-@app.post("/api/v1/chat/completions")
+@app.post("/v1/chat/completions")
 def api_chat_completion(chat_request: ChatRequest):
     if not chat_request.messages:
         return {"error": "Messages are required"}
