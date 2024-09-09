@@ -5,11 +5,21 @@ from typing import List, Optional
 import boto3
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
 from fastapi.responses import RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 app = FastAPI()
+
+# CORS 設定
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.mount("/demo", StaticFiles(directory="static", html=True))
 

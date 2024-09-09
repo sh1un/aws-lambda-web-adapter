@@ -28,7 +28,7 @@ async function generateAIResponse() {
     };
 
     // Use Fetch API to send a POST request for response streaming
-    const response = await fetch("/v1/chat/completions", {
+    const response = await fetch("https://3bj6absvecvdtp5ufb32fporgi0licyc.lambda-url.us-east-1.on.aws/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
